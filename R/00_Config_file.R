@@ -1,13 +1,13 @@
 #----------------------------------------------------------#
 #
 #
-#                     Project name
+#                       PeerLens
 #
 #                     Config file
 #
 #
 #                       O. Mottl
-#                         2023
+#                         2024
 #
 #----------------------------------------------------------#
 # Configuration script with the variables that should be consistent throughout
@@ -39,19 +39,18 @@ if (
   library(here)
   # Synchronise the package versions
   renv::restore(
-    lockfile = here::here("renv/library_list.lock")
+    lockfile = here::here("renv.lock")
   )
   already_synch <- TRUE
 
   # Save snapshot of package versions
-  # renv::snapshot(lockfile =  "renv/library_list.lock")  # do only for update
+  # renv::snapshot(lockfile =  here::here())  # do only for update
 }
 
 # Define packages
 package_list <-
   c(
-   "assertthat",
-    "devtools",
+    "assertthat",
     "here",
     "httpgd",
     "janitor",
@@ -62,7 +61,8 @@ package_list <-
     "renv",
     "remotes",
     "rlang",
-    "roxygen2",
+    "shiny",
+    "shinysurveys",
     "tidyverse",
     "usethis",
     "utils"
@@ -95,10 +95,14 @@ fun_list <-
   )
 
 # source them
-sapply(
-  paste0("R/functions/", fun_list, sep = ""),
-  source
-)
+if (
+  length(fun_list) > 0
+) {
+  sapply(
+    paste0("R/Functions/", fun_list, sep = ""),
+    source
+  )
+}
 
 
 #----------------------------------------------------------#

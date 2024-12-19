@@ -1,54 +1,66 @@
-# Project template
+# PeerLens
 
-Template for a general structure of a project
+**Purpose:**  
+A system for students to anonymously evaluate peer presentations and for the admin to manage student lists, retrieve evaluation results, and share feedback with presenters.
 
-## General info
+---
 
-This template is a recommended structure for R projects which consists of modular codes with individual functions and purposes. The Config file is the single file where all variables, packages, criteria are defined. Operations are singled out in folders and R-codes.
+## Key Components
 
-## Default Main structure
+### 1. Technology Stack
 
-```
+- **Framework:** Built with **R Shiny**.
+- **Survey Tool:** Leveraging **shinysurveys** for creating evaluation forms.
+- **Data Storage:** Results stored in **Google Sheets**.
+- **Hosting:** Deployed on **Shinyapps.io (free-tier)**.
 
-├─ Data
-|   ├─ Input
-|   ├─ Processed
-|   └─ Temp
-├─ Outputs
-|   ├─ Data
-|   ├─ Figures
-|   └─ Tables
-├─ R
-|   ├─ ___Init_project___.R
-|   ├─ 00_Config_file.R
-|   ├─ 01_Data_processing
-|   ├─ 02_Main_analyses
-|   ├─ 03_Supplementary_analyses
-|   ├─ Functions
-|       └─ example_fc.R
-├─ renv
-|   ├─ activate.R
-|   ├─ library
-|   ├─ settings.json
-|   └─ library_list.lock
-├─ README.md
-├─ LICENSE
-└─ [project name].Rproj
-```
+### 2. Access Modes
 
-## Getting the code
+- **Student Access:**
+  - Anonymous interface for submitting evaluations.
+  - Dropdown menu showing all student names for the semester.
+  - Input fields for evaluation criteria and optional comments.
+- **Admin Access:**
+  - Secure panel to:
+    - Upload a list of student names for the semester.
+    - View and filter results (grouped by year, semester, or other criteria).
+    - **Live Summary Statistics:** Visual summaries (e.g., bar charts, averages) for selected sections of the evaluation form, available per student.
+    - Download aggregated data for analysis.
+  - Email the full evaluation results to the respective student after their seminar.
 
-The project is accessible in two ways:
-  
-  1. If a user has a [GitHub account](https://github.com/), the easiest way is to [clone](https://happygitwithr.com/clone.html) this GitHub repo.
-  
-  2. A user can download the latest *Release* of the project as a zip file from the Release page.
+---
 
-The R project consists of codes with individual scripts and functions. All scripts are stored in the `R/` folder.
-## Set up
+## Workflow
 
-Once a user obtains their version of the project, there are several steps to be done before using it:
+### A. Semester Setup
 
-* Update [R](https://en.wikipedia.org/wiki/R_(programming_language)) and [R-studio IDE](https://posit.co/products/open-source/rstudio/). There are many guides on how to do so (e.g. [here](https://jennhuck.github.io/workshops/install_update_R.html))
+- Admin uploads a list of student names at the beginning of the semester.
 
-* Execute all individual steps with the `___Init_project___.R` script. This will result in the preparation of all R-packages using the [`{renv}` package](https://rstudio.github.io/renv/articles/renv.html), which is an R dependency management of your projects. Mainly it will install [`{RUtilpol}`](https://github.com/HOPE-UIB-BIO/R-Utilpol-package) and all dependencies. `{RUtilpol}` is used throughout the project as a version control of files.
+### B. Weekly Operations
+
+- Students evaluate their peers anonymously.
+- Admin accesses live summary statistics for students after each seminar and emails the full evaluation results to the respective presenter.
+
+### C. Result Management
+
+- Evaluation results are stored in Google Sheets, including:
+  - Evaluated student name.
+  - Scores for each criterion.
+  - Comments.
+  - Timestamp.
+- Historical data retained for analysis.
+
+---
+
+## Features
+
+1. **Anonymous Evaluations:**  
+   - No evaluator names are collected to maintain impartiality.
+2. **Live Summary Statistics:**  
+   - Visual summaries for selected sections of the evaluation form (e.g., clarity scores) displayed in the admin dashboard.
+3. **Custom Emailing:**  
+   - Full evaluation results can be exported and emailed to the respective presenter.
+4. **Secure Admin Access:**  
+   - Role-based access with password protection.
+5. **Data Retention:**  
+   - Historical data stored for multi-year analysis.
