@@ -14,7 +14,10 @@ questions <-
 ui <-
   shiny::fluidPage(
     shiny::titlePanel("PeerLens - Phase 1"),
-    shinysurveys::surveyOutput(df = questions)
+    shinysurveys::surveyOutput(df = questions),
+    shiny::hr(), # Add a horizontal rule for separation
+    shiny::h3("Submitted Responses"), # Add a title for the table
+    shiny::tableOutput("responses_table") # Output table for responses
   )
 
 server <- function(input, output, session) {
@@ -46,6 +49,12 @@ server <- function(input, output, session) {
       responses_all(updated_data)
     }
   )
+
+  # Render the responses table
+  output$responses_table <-
+    shiny::renderTable({
+      responses_all()
+    })
 }
 
 shiny::shinyApp(ui, server)
